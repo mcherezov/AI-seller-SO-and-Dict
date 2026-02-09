@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "description": "Сокращенный словарь возможностей AI Seller",
+    "version": "short 1.0"
+  },
+  "entities": {
+    "campaign": {
+      "name": "Кампания",
+      "description": "Рекламная кампания",
+      "variables": [
+        { "id": "campaign_id", "name": "Идентификатор кампании", "type": "str" },
+        { "id": "campaign_type", "name": "Тип кампании", "type": "str", "values": ["Ручная", "Единая"] },
+        { "id": "campaign_creation_time", "name": "Время создания кампании", "type": "datetime" },
+        { "id": "campaign_name", "name": "Название кампании", "type": "str" },
+        { "id": "campaign_budget", "name": "Бюджет кампании", "type": "float(2)" },
+      ],
+      "actions": [
+        { "id": "campaign_pause", "name": "Поставить кампанию на паузу", "restrictions": null, "required_value_type": null },
+      ]
+    },
+    "product": {
+      "name": "Товар",
+      "description": "Товарная единица (SKU)",
+      "variables": [
+        { "id": "product_nm_id", "name": "Артикул товара ВБ", "type": "str" },
+        { "id": "product_name", "name": "Наименование товара", "type": "str" },
+        { "id": "product_price", "name": "Цена товара", "type": "int" },
+        { "id": "product_stock_total", "name": "Остаток товара на всех складах", "type": "int" },
+        { "id": "product_views", "name": "Показы товара", "type": "int" },
+        { "id": "product_orders", "name": "Заказы товара", "type": "int" },
+        { "id": "product_search_visibility", "name": "Видимость товара в поиске", "type": "float(2)" },
+        { "id": "product_margin_abs", "name": "Маржа товара (абс.)", "type": "float(2)" },
+        { "id": "product_margin_percent", "name": "Маржинальность товара (%)", "type": "float(2)" },
+      ],
+      "actions": [
+        { "id": "product_increase_bid_rub", "name": "Повысить ставку на товар на x руб. В ручных и единых кампаниях. В ручных изменяет ставки сразу в поиске и рекомендациях", "restrictions": "null", "required_value_type": "int" },
+        { "id": "product_decrease_bid_rub", "name": "Понизить ставку на товар на x руб. В ручных и единых кампаниях. В ручных изменяет ставки сразу в поиске и рекомендациях", "restrictions": "null", "required_value_type": "int" },
+        { "id": "product_decrease_search_bid_rub", "name": "Понизить ставку товара в поиске на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_increase_search_bid_rub", "name": "Повысить ставку товара в поиске на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_decrease_rec_bid_rub", "name": "Понизить ставку товара в рекомендациях на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_increase_rec_bid_rub", "name": "Повысить ставку товара в рекомендациях на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_increase_bid_percent", "name": "Повысить ставку на товар на x%. В ручных и единых кампаниях. В ручных изменяет ставки сразу в поиске и рекомендациях", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_decrease_bid_percent", "name": "Понизить ставку на товар на x%. В ручных и единых кампаниях. В ручных изменяет ставки сразу в поиске и рекомендациях", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_decrease_search_bid_percent", "name": "Понизить ставку товара в поиске на x%", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_increase_search_bid_percent", "name": "Повысить ставку товара в поиске на x%", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_decrease_rec_bid_percent", "name": "Понизить ставку товара в рекомендациях на x%", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_increase_rec_bid_percent", "name": "Повысить ставку товара в рекомендациях на x%", "restrictions": "Ручная ставка", "required_value_type": "int" },
+      ]
+    },
+    "cluster": {
+      "name": "Кластер",
+      "description": "Группы поисковых запросов",
+      "variables": [
+        { "id": "cluster_phrase", "name": "Нормализованная фраза кластера", "type": "str" },
+        { "id": "cluster_views", "name": "Показы по кластеру", "type": "int" },
+        { "id": "cluster_orders", "name": "Заказы по кластеру", "type": "int" },
+        { "id": "cluster_margin_abs", "name": "Маржа кластера (абс.)", "type": "float(2)" },
+        { "id": "cluster_margin_percent", "name": "Маржинальность кластера (%)", "type": "float(2)" },        { "id": "cluster_bid", "name": "Ставка по кластеру", "type": "int" },
+        { "id": "cluster_bid", "name": "Ставка по кластеру в рублях", "type": "int" },
+        { "id": "cluster_ctr", "name": "CTR кластера", "type": "float(2)" }
+      ],
+      "actions": [
+        { "id": "cluster_increase_bid_percent", "name": "Повысить ставку по кластеру на %", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "cluster_decrease_bid_percent", "name": "Понизить ставку по кластеру на %", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "cluster_increase_bid_rub", "name": "Повысить ставку по кластеру на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "cluster_decrease_bid_rub", "name": "Понизить ставку по кластеру на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "cluster_exclude", "name": "Исключить набор кластеров", "restrictions": "Ручная ставка", "required_value_type": "null" },
+      ]
+    }
+  }
+}

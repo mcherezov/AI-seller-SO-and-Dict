@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "description": "Словарь возможностей AI Seller",
+    "version": "1.3"
+  },
+  "entities": {
+    "campaign": {
+      "name": "Кампания",
+      "description": "Рекламная кампания",
+      "variables": [
+        { "id": "campaign_id", "name": "Идентификатор кампании", "type": "str" },
+        { "id": "campaign_type", "name": "Тип кампании", "type": "str", "values": ["Ручная", "Единая"] },
+        { "id": "campaign_payment_model", "name": "Модель оплаты кампании", "type": "str", "values": ["CPM", "CPC"] },
+        { "id": "campaign_creation_time", "name": "Время создания кампании", "type": "datetime" },
+        { "id": "campaign_name", "name": "Название кампании", "type": "str" },
+        { "id": "campaign_products_count", "name": "Количество товаров в кампании", "type": "int" },
+        { "id": "campaign_placement", "name": "Место размещения кампании", "type": "str", "values": ["Рекомендации", "Поиск"] },
+        { "id": "campaign_status", "name": "Статус кампании", "type": "int", "values": ["4 - Готова", "7 - Завершена", "9 - Активна", "11 - Пауза"] },
+        { "id": "campaign_update_time", "name": "Время изменения кампании", "type": "datetime" }, // Зачем
+        { "id": "campaign_budget", "name": "Бюджет кампании", "type": "float(2)" },
+        { "id": "campaign_product_list", "name": "Список товаров в кампании", "type": "str" } // Зачем
+      ],
+      "actions": [
+        { "id": "campaign_start", "name": "Запустить кампанию", "restrictions": null, "required_value_type": null }, // уточнить, что это не создание 
+        { "id": "campaign_pause", "name": "Поставить кампанию на паузу", "restrictions": null, "required_value_type": null },
+        { "id": "campaign_change_placement", "name": "Изменить место размещения кампании", "restrictions": "Доступно только для кампаний типа Ручная ставка", "required_value_type": "str" },
+        { "id": "campaign_add_products", "name": "Добавить товары в кампанию", "restrictions": null, "required_value_type": "str" },
+        { "id": "campaign_remove_products", "name": "Удалить товары из кампании", "restrictions": null, "required_value_type": "str" },
+        { "id": "campaign_top_up_budget", "name": "Пополнить бюджет кампании", "restrictions": null, "required_value_type": "int" },
+        { "id": "campaign_set_negative_phrases", "name": "Установить минус-фразы кампании (поиск)", "restrictions": "Доступно только для кампаний типа Ручная ставка", "required_value_type": "str" }
+      ]
+    },
+    "product": {
+      "name": "Товар",
+      "description": "Товарная единица (SKU)",
+      "variables": [
+        { "id": "product_nm_id", "name": "Артикул товара ВБ", "type": "str" },
+        { "id": "product_sku_seller", "name": "Артикул товара продавца", "type": "str" },
+        { "id": "product_brand", "name": "Бренд товара", "type": "str" },
+        { "id": "product_measurement", "name": "Габариты товара", "type": "str" },
+        { "id": "product_color", "name": "Цвет товара", "type": "str" },
+        { "id": "product_size", "name": "Размер товара", "type": "str" },
+        { "id": "product_category", "name": "Категория товара", "type": "str" },
+        { "id": "product_name", "name": "Наименование товара", "type": "str" },
+        { "id": "product_desc", "name": "Описание товара", "type": "str" },
+        { "id": "product_tags", "name": "Ярлыки товара", "type": "str" },
+        { "id": "product_price", "name": "Цена товара", "type": "int" },
+        { "id": "product_discount_seller", "name": "Скидка продавца на товар", "type": "int" },
+        { "id": "product_discount_wb_club", "name": "Скидка WB Клуба на товар", "type": "int" },
+        { "id": "product_stock_total", "name": "Остаток товара на всех складах", "type": "int" },
+        { "id": "product_views", "name": "Показы товара", "type": "int" },
+        { "id": "product_clicks", "name": "Клики товара", "type": "int" },
+        { "id": "product_cart_adds", "name": "Добавления товара в корзину", "type": "int" },
+        { "id": "product_orders", "name": "Заказы товара", "type": "int" },
+        { "id": "product_buyouts", "name": "Выкупы товара", "type": "int" },
+        { "id": "product_cancellations", "name": "Отмены товара", "type": "int" },
+        { "id": "product_search_visibility", "name": "Видимость товара в поиске", "type": "float(2)" },
+        { "id": "product_margin_abs", "name": "Маржа товара (абс.)", "type": "float(2)" },
+        { "id": "product_margin_percent", "name": "Маржинальность товара (%)", "type": "float(2)" },
+        { "id": "product_avg_position", "name": "Средняя позиция товара", "type": "int" }, 
+        { "id": "product_drr", "name": "Доля рекламных расходов по товару, в %", "type": "int" }
+      ],
+      "actions": [
+        { "id": "product_set_bid", "name": "Установить ставку на товар в ручных и единых кампаниях. В ручных устанавливает ставку сразу в поиске и рекомендациях.", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_set_min_bid", "name": "Установить минимальную для этой категории товара ставку на товар в ручных и единых кампаниях. В ручных устанавливает ставку сразу в поиске и рекомендациях.", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_increase_bid_rub", "name": "Повысить ставку на товар на x руб. В ручных и единых кампаниях. В ручных изменяет ставки сразу в поиске и рекомендациях", "restrictions": "null", "required_value_type": "int" },
+        { "id": "product_decrease_bid_rub", "name": "Понизить ставку на товар на x руб. В ручных и единых кампаниях. В ручных изменяет ставки сразу в поиске и рекомендациях", "restrictions": "null", "required_value_type": "int" },
+        { "id": "product_set_search_bid", "name": "Установить ставку товара в поиске", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_decrease_search_bid_rub", "name": "Понизить ставку товара в поиске на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_increase_search_bid_rub", "name": "Повысить ставку товара в поиске на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_set_rec_bid", "name": "Установить ставку товара в рекомендациях", "restrictions": "Ручная ставка", "required_value_type": "int" },        
+        { "id": "product_decrease_rec_bid_rub", "name": "Понизить ставку товара в рекомендациях на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_increase_rec_bid_rub", "name": "Повысить ставку товара в рекомендациях на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_increase_bid_percent", "name": "Повысить ставку на товар на x%. В ручных и единых кампаниях. В ручных изменяет ставки сразу в поиске и рекомендациях", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_decrease_bid_percent", "name": "Понизить ставку на товар на x%. В ручных и единых кампаниях. В ручных изменяет ставки сразу в поиске и рекомендациях", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_decrease_search_bid_percent", "name": "Понизить ставку товара в поиске на x%", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_increase_search_bid_percent", "name": "Повысить ставку товара в поиске на x%", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_decrease_rec_bid_percent", "name": "Понизить ставку товара в рекомендациях на x%", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_increase_rec_bid_percent", "name": "Повысить ставку товара в рекомендациях на x%", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "product_decrease_price_rub", "name": "Понизить цену товара на x руб.", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_increase_price_rub", "name": "Повысить цену товара на x руб.", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_decrease_price_percent", "name": "Понизить цену товара на х%", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_increase_price_percent", "name": "Повысить цену товара на х%", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_increase_seller_discount_percent", "name": "Повысить скидку продавца на товар на х%", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_decrease_seller_discount_percent", "name": "Понизить скидку продавца на товар на х%", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_increase_wb_club_discount_percent", "name": "Повысить скидку WB Клуб на товар на х%", "restrictions": null, "required_value_type": "int" },
+        { "id": "product_decrease_wb_club_discount_percent", "name": "Понизить скидку WB Клуб на товар на х%", "restrictions": null, "required_value_type": "int" }
+      ]
+    },
+    "cluster": {
+      "name": "Кластер",
+      "description": "Группы поисковых запросов",
+      "variables": [
+        { "id": "cluster_phrase", "name": "Нормализованная фраза кластера", "type": "str" },
+        { "id": "cluster_views", "name": "Показы по кластеру", "type": "int" },
+        { "id": "cluster_clicks", "name": "Клики по кластеру", "type": "int" },
+        { "id": "cluster_cart_adds", "name": "Добавления в корзину по кластеру", "type": "int" },
+        { "id": "cluster_orders", "name": "Заказы по кластеру", "type": "int" },
+        { "id": "cluster_margin_abs", "name": "Маржа кластера (абс.)", "type": "float(2)" },
+        { "id": "cluster_margin_percent", "name": "Маржинальность кластера (%)", "type": "float(2)" },
+        { "id": "cluster_avg_position", "name": "Средняя позиция по кластеру", "type": "int" },
+        { "id": "cluster_ctr", "name": "CTR кластера", "type": "float(2)" },
+        { "id": "cluster_cpc", "name": "CPC кластера", "type": "int" },
+        { "id": "cluster_cpm", "name": "CPM кластера", "type": "int" },
+        { "id": "cluster_costs", "name": "Затраты на кластер", "type": "int" },
+        { "id": "cluster_crvo", "name": "CRVO кластера", "type": "float(2)" },
+        { "id": "cluster_bid", "name": "Ставка по кластеру в рублях", "type": "int" },
+        { "id": "cluster_relevance", "name": "Релевантность кластера наванию и описанию карточки", "type": "float(2)" },
+        { "id": "cluster_drr", "name": "Доля рекламных расходов по кластеру, в %", "type": "int" }
+      ],
+      "actions": [
+        { "id": "cluster_set_bid", "name": "Установить ставку по кластеру.", "restrictions": null, "required_value_type": "int" },
+        { "id": "cluster_set_min_bid", "name": "Установить минимальную для этой категории товара ставку по кластеру.", "restrictions": null, "required_value_type": "int" },
+        { "id": "cluster_increase_bid_percent", "name": "Повысить ставку по кластеру на %", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "cluster_decrease_bid_percent", "name": "Понизить ставку по кластеру на %", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "cluster_increase_bid_rub", "name": "Повысить ставку по кластеру на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "cluster_decrease_bid_rub", "name": "Понизить ставку по кластеру на x руб.", "restrictions": "Ручная ставка", "required_value_type": "int" },
+        { "id": "cluster_exclude", "name": "Исключить набор кластеров", "restrictions": "Ручная ставка", "required_value_type": "null" },
+        { "id": "cluster_remove_bids", "name": "Удалить ставки по кластерам", "restrictions": null, "required_value_type": "null" }
+      ]
+    },
+    "system": {
+      "name": "Система",
+      "actions": [
+        { "id": "system_send_notification", "name": "Отправить уведомление, сгенерировать алерт", "restrictions": null }
+        
+      ]
+    }
+  }
+}
