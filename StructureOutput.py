@@ -184,14 +184,20 @@ class ActionItem(BaseModel):
 # endregion
 
 # region Верхнеуровневые элементы стратегии
-class StaticSets(BaseModel):
-    set_of_campaigns: Optional[List[str]] = Field(
-        ...,
-        description="List of campaign_id that must be included in the strategy if prompted by user (for instance, user asked to create new campaigns and start a new strategy for them explicitly).",
+class CampaignProductLink(BaseModel):
+    campaign_id: str = Field(
+        ..., 
+        description="Идентификатор рекламной кампании (числовая строка)."
     )
-    set_of_products: Optional[List[str]] = Field(
-        ...,
-        description="List of product_nm_id that must be included in the strategy if prompted by user (for instance, user asked to control bids fot several products explicitly).",
+    product_ids: List[str] = Field(
+        ..., 
+        description="Список идентификаторов товаров (номенклатур), относящихся к данной РК в рамках стратегии."
+    )
+
+class StaticSets(BaseModel):
+    links: Optional[List[CampaignProductLink]] = Field(
+        default=None,
+        description="Список связок Кампания-Товары для статического управления."
     )
 
 class Branch(BaseModel):
